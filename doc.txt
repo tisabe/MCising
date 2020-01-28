@@ -1,1 +1,52 @@
 this is the doc file we use to plan the project
+
+MCstep (Tim)
+	input:
+		*s: configuration					        char array of size N**D
+        B: magnetic field                           double
+        beta: 1/kT                                  double
+ 		N: length of all axis						long int
+		D: number of dimensions						unsigned int
+	output:
+		void
+	Tested by: ???
+	
+init_config (Mahni)
+    input:
+        *s: configuration					        char array of size N**D
+ 		N: length of all axis						long int
+		D: number of dimensions						unsigned int
+    output:
+        void
+    Tested by: ???
+    
+obs_energy (Birkan)
+    input:
+        *s: configuration					        char array of size N**D
+        B: magnetic field                           double
+        beta: 1/kT                                  double
+ 		N: length of all axis						long int
+		D: number of dimensions						unsigned int
+    output:
+        energy: energy of configuration             double
+    Tested by: ???
+    
+obs_magn (Birkan)
+    input:
+        *s: configuration					        char array of size N**D
+ 		N: length of all axis						long int
+		D: number of dimensions						unsigned int
+    output:
+        magn: magnetisation of configuration        double
+    Tested by: ???
+    
+obs_correlation (???)
+    input:
+        *s: configuration					        char array of size N**D
+        index1: lattice point 1                     long int
+        index2: lattice point 2                     long int
+ 		N: length of all axis						long int
+		D: number of dimensions						unsigned int
+    output:
+        corr: correlation of point 1 and 2          double
+    Tested by: ???
