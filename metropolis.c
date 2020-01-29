@@ -43,7 +43,7 @@ void step_mc(char *s, double B, double beta, long int N, unsigned int D) {
         // so the spin is flipped
         if (p >= 1) {
             s[i] *= -1;
-        } else if (rand_f < p) { // if p is smaller than 1, flip spin with probability p
+        } else if (rand_f() < p) { // if p is smaller than 1, flip spin with probability p
             s[i] *= -1;
         }
     }
