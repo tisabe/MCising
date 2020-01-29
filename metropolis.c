@@ -37,7 +37,7 @@ void step_mc(char *s, double B, double beta, long int N, unsigned int D) {
         diff_H = 2*(diff_H + B*s[i]);
 
         // now calculate p as exponential
-        double p = exp(-1*diff_H);
+        double p = exp(-1*beta*diff_H);
 
         // if p is greater than one, the energy is smaller with flipped spin,
         // so the spin is flipped
