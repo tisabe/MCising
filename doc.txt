@@ -1,6 +1,6 @@
 this is the doc file we use to plan the project
 
-MCstep (Tim)
+metropolis (Tim)
 	input:
 		*s: configuration					        char array of size N**D
         B: magnetic field                           double
