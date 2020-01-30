@@ -17,7 +17,7 @@ void step_mc(char *s, double B, double beta, long int N, unsigned int D) {
 
     //Check if geometry parameters have changed. If yes, free, reallocate and recalculate the next neighbours the array again
     if((neighbours == NULL) || (prev_N != N) || (prev_D != D)){
-        free(neighbours);
+        if(neighbours != NULL){free(neighbours);}
         L = ipow(N, D);
         neighbours = malloc(2*D*L*sizeof(long int));
         nneighbour_init(neighbours, N, D);
