@@ -38,7 +38,7 @@ void init_config2(char *configuration, parameters params){
             configuration[i]=-1;
         }
     }
-    void gsl_rng_free( r)
+    gsl_rng_free(r);
 }
 
 void init_config3(char *configuration, parameters params){
@@ -71,4 +71,4 @@ void main(){
 
 void gsl_rng_free( r)
     free(configuration);
-}
+}*/
