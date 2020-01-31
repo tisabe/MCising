@@ -7,8 +7,15 @@
 #include "vmath.h"
 
 double rand_f() {
-    // returns a random double in the interval [0,1)
-    return (double)rand()/RAND_MAX; // may need to be replaced by a better RNG
+   	// returns a random double in the interval [0,1)
+	// directly put this into the main code for optimization purposes
+
+	gsl_rng * r = gsl_rng_alloc (gsl_rng_taus);
+	double r_max = gsl_rng_max(r);
+	double random_number = gsl_rng_get (r)/r_max;
+	gsl_rng_free(r);
+
+   	return random_number; 
 }
 
 void step_mc(char *s, double B, double beta, long int N, unsigned int D) {
