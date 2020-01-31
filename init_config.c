@@ -31,6 +31,7 @@ void init_config2(char *configuration, parameters params){
 	double r_max = gsl_rng_max(r);
 
     	for (int i=0; i<L; i++) {
+			//configuration[i] = 2*(gsl_rng_get(r)%2 -1) Vorschlag von Tim
         	if(gsl_rng_get (r)/r_max<0.5){
         	    configuration[i]=1;
        		}
