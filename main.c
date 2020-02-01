@@ -25,9 +25,9 @@ int main(){
   char *s = malloc(params.L * sizeof(char));
   double *hamiltonian_vec = malloc(params.L * sizeof(double));
   double *magnetization_vec = malloc(params.L * sizeof(double));
-  long int *neighbour = malloc(2*D*L*sizeof(long int));
+  long int *neighbour = malloc(2*params.D*params.L*sizeof(long int));
 
-  nneighbour_init(neighbour, params.N, params.D)
+  nneighbour_init(neighbour, params.N, params.D);
 
   FILE *config_file;
   config_file = fopen("config_output.txt","w");
