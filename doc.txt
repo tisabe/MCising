@@ -50,3 +50,26 @@ obs_correlation (???)
     output:
         corr: correlation of point 1 and 2          double
     Tested by: ???
+    
+auto_corr (Tim)
+	input:
+		*x: vector of which is tested				double array of size N
+		N: length of the vector						long int
+		k: offset of autocorrelation				long int
+		mu: true mean of the sample					double
+	output:
+		res: auto correlation of the sample			double
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
