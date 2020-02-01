@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <gsl/gsl_rng.h>
 
 #include "structs.h"
 #include "geometry.h"
@@ -15,7 +16,7 @@ double rand_f() {
 	double random_number = gsl_rng_get (r)/r_max;
 	gsl_rng_free(r);
 
-   	return random_number; 
+   	return random_number;
 }
 
 void step_mc(char *s, double B, double beta, long int N, unsigned int D) {
@@ -55,4 +56,14 @@ void step_mc(char *s, double B, double beta, long int N, unsigned int D) {
         }
     }
     // after iterating over all lattice points, the MC step is completed
+}
+
+double auto_corr(double *s, long int N, long int k, double mu) {
+
+	double res = 0.;
+	for(long int i=0; i<(N-k); i++) {
+		res += (s[i]-mu) * (s[i+k]-mu);
+	}
+
+	return res/(N-k);
 }
