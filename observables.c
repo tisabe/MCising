@@ -8,7 +8,7 @@
 
 void hamiltonian(double *out, char *in, long int *neighbour, double B, long int N, unsigned int D, long int iteration){
     double hamilton_config = 0;
-    L=ipow(N,D);
+    long int L=ipow(N,D);
     for (long int i=0; i<L; i++){
         hamilton_config += (-1)*B*in[i];
         for (int j=0; j<D; j++){
@@ -20,7 +20,7 @@ void hamiltonian(double *out, char *in, long int *neighbour, double B, long int 
 
 void magnetization(double *out, char *in, long int N, unsigned int D, long int iteration){
     double magnetization_config = 0;
-    L=ipow(N,D);
+    long int L=ipow(N,D);
     for (long int i=0; i<L; i++){
         hamilton_config += in[i];
     }
