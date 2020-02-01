@@ -18,7 +18,7 @@ void hamiltonian(double *out, char *in, long int *neighbour, double B, long int 
     out[iteration]=hamilton_config;
 }
 
-void magnetization((double *out, char *in, long int N, unsigned int D, long int iteration){
+void magnetization(double *out, char *in, long int N, unsigned int D, long int iteration){
     double magnetization_config = 0;
     L=ipow(N,D);
     for (long int i=0; i<L; i++){
