@@ -28,16 +28,10 @@ void init_config1(char *configuration, parameters params){
 void init_config2(char *configuration, parameters params){
 	long int L= params.L;
 	gsl_rng * r = gsl_rng_alloc (gsl_rng_taus);
-	double r_max = gsl_rng_max(r);
+	//double r_max = gsl_rng_max(r);
 
     	for (int i=0; i<L; i++) {
-			//configuration[i] = 2*(gsl_rng_get(r)%2 -1) Vorschlag von Tim
-        	if(gsl_rng_get (r)/r_max<0.5){
-        	    configuration[i]=1;
-       		}
-        	else{
-            	configuration[i]=-1;
-        	}
+		configuration[i] = 2*(gsl_rng_get(r)) % 2 - 1
     	}
     	gsl_rng_free(r);
 }
