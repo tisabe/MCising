@@ -23,9 +23,9 @@ int main(){
   params.L = ipow(params.N,params.D);
 
   char *s = malloc(params.L * sizeof(char));
-  double hamiltonian_vec = malloc(params.L * sizeof(double));
-  double magnetization_vec = malloc(params.L * sizeof(double));
-  long int neighbour = malloc(2*D*L*sizeof(long int));
+  double *hamiltonian_vec = malloc(params.L * sizeof(double));
+  double *magnetization_vec = malloc(params.L * sizeof(double));
+  long int *neighbour = malloc(2*D*L*sizeof(long int));
 
   nneighbour_init(neighbour, params.N, params.D)
 
