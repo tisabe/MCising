@@ -22,7 +22,7 @@ void magnetization(double *out, char *in, long int N, unsigned int D, long int i
     double magnetization_config = 0;
     long int L=ipow(N,D);
     for (long int i=0; i<L; i++){
-        hamilton_config += in[i];
+        magnetization_config += in[i];
     }
     out[iteration]=magnetization_config;
 }
