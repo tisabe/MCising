@@ -11,10 +11,10 @@
 void step_mc(char *s, parameters params) {
     static long int *neighbours = NULL;
     static long int prev_N, prev_D, L;
-    
+
     gsl_rng * r = gsl_rng_alloc (gsl_rng_taus);
     double r_max = gsl_rng_max(r);
-    
+
     //Check if geometry parameters have changed. If yes, free, reallocate and recalculate the next neighbours the array again
     if((neighbours == NULL) || (prev_N != params.N) || (prev_D != params.D)){
         if(neighbours != NULL){free(neighbours);}
@@ -48,14 +48,4 @@ void step_mc(char *s, parameters params) {
     }
     // after iterating over all lattice points, the MC step is completed
     gsl_rng_free(r);
-}
-
-double auto_corr(double *s, long int N, long int k, double mu) {
-
-	double res = 0.;
-	for(long int i=0; i<(N-k); i++) {
-		res += (s[i]-mu) * (s[i+k]-mu);
-	}
-
-	return res/(N-k);
 }

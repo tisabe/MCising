@@ -33,9 +33,9 @@ int main(){
 
   config_file = fopen("config_output.txt","w");
 
-  init_config_rng(s, params);
+  init_config_alternate(s, params);
 
-  int prog = 0;
+  long int prog = 0;
 
   for(long int i = 0; i < C; i++){
     //if(i % 1000 == 0){
@@ -43,9 +43,9 @@ int main(){
         fprintf(config_file, "%d\t", s[j]);
       }
       fprintf(config_file, "\n");
-      if(i%10 == 0){printf("%i proc. progress\n",prog); prog += 10;}
+      if(i%10 == 0){printf("Saving config no. %ld\n",prog); prog += 10;}
     //}
-      step_mc(s, params.B, params.beta, params.N, params.D);  //params
+      step_mc(s, params);
       hamiltonian(hamiltonian_vec, s, params, neighbour, i);
       magnetization(magnetization_vec, s, params, i);
   }
@@ -53,7 +53,7 @@ int main(){
   FILE *obs_file;
   obs_file = fopen("obs_output.txt","w");
   for(long int i = 0; i < C; i++){
-      fprintf(obs_file, "%e\t%e\n", hamiltonian_vec[i], magnetization_vec[i]);
+      fprintf(obs_file, "%ld\t%e\t%e\n", i, hamiltonian_vec[i], magnetization_vec[i]);
   }
   fclose(obs_file);
 

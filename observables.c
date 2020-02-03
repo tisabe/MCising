@@ -24,3 +24,14 @@ void magnetization(double *out, char *in, parameters params, long int iteration)
     }
     out[iteration]=magnetization_config;
 }
+
+
+double auto_corr(double *obs, long int N, long int k, double mu) {
+
+	double res = 0.;
+	for(long int i=0; i<(N-k); i++) {
+		res += (obs[i]-mu) * (obs[i+k]-mu);
+	}
+
+	return res/(N-k);
+}
