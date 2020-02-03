@@ -21,9 +21,10 @@ void init_config_rand(char *configuration, parameters params){
     }
 }
 
-void init_config_rng(char *configuration, parameters params){
+void init_config_rng(char *configuration, unsigned long int seed, parameters params){
 	long int L= params.L;
 	gsl_rng * r = gsl_rng_alloc (gsl_rng_taus);
+	gsl_rng_set(r, seed); // set the seed for the rng
 	//double r_max = gsl_rng_max(r);
 
     	for (int i=0; i<L; i++) {

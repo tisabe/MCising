@@ -33,7 +33,8 @@ int main(){
 
   config_file = fopen("config_output.txt","w");
 
-  init_config_alternate(s, params);
+  //init_config_alternate(s, params);
+  init_config_rng(s, 42, params);
 
   long int prog = 0;
 
@@ -45,7 +46,7 @@ int main(){
       fprintf(config_file, "\n");
       if(i%10 == 0){printf("Saving config no. %ld\n",prog); prog += 10;}
     //}
-      step_mc(s, params);
+      step_mc(s, 42, params);
       hamiltonian(hamiltonian_vec, s, params, neighbour, i);
       magnetization(magnetization_vec, s, params, i);
   }
@@ -61,6 +62,7 @@ int main(){
 
   fclose(config_file);
   free(s);
+  printf("last energy: %e\n", hamiltonian_vec[C-1]);
 
   return 0;
 }
