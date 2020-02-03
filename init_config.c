@@ -27,7 +27,7 @@ void init_config_rng(char *configuration, parameters params){
 	//double r_max = gsl_rng_max(r);
 
     	for (int i=0; i<L; i++) {
-		configuration[i] = 2*(gsl_rng_get(r)) % 2 - 1;
+		configuration[i] = 2*(gsl_rng_get(r) % 2) - 1;
     	}
     	gsl_rng_free(r);
 }
@@ -58,7 +58,7 @@ void init_config_down(char *configuration, parameters params){
             configuration[i]=-1;
     }
 }
-/*
+
 void main(){
     long int L= 100;
 	char *configuration = malloc(L * sizeof(char));
@@ -66,17 +66,12 @@ void main(){
 	double r_max = gsl_rng_max(r);
 
     for (int i=0; i<L; i++) {
-        if(gsl_rng_get(r)/r_max<0.5){
-            configuration[i]=1;
-        }
-        else{
-            configuration[i]=-1;
-        }
+		configuration[i] = 2*(gsl_rng_get(r) % 2) - 1;
         printf("%d \n",configuration[i]);
+    	}
+        
 
-    }
-
-	gsl_rng_free( r);
+	gsl_rng_free(r);
     free(configuration);
 }
-*/
+
