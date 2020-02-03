@@ -17,7 +17,7 @@ void init_config_rand(char *configuration, parameters params){
 	long int L= params.L;
 
     for (int i=0; i<L; i++) {
-        configuration[i] = 2*(rand()) % 2 - 1;
+        configuration[i] = 2*(rand() % 2) - 1;
     }
 }
 
@@ -59,7 +59,7 @@ void init_config_down(char *configuration, parameters params){
     }
 }
 
-void main(){
+/*void main(){
     long int L= 100;
 	char *configuration = malloc(L * sizeof(char));
     gsl_rng * r = gsl_rng_alloc (gsl_rng_taus);
@@ -69,9 +69,8 @@ void main(){
 		configuration[i] = 2*(gsl_rng_get(r) % 2) - 1;
         printf("%d \n",configuration[i]);
     	}
-        
+
 
 	gsl_rng_free(r);
     free(configuration);
-}
-
+}*/

@@ -30,6 +30,7 @@ int main(){
   nneighbour_init(neighbour, params.N, params.D);
 
   FILE *config_file;
+
   config_file = fopen("config_output.txt","w");
 
   init_config_rng(s, params);
@@ -48,6 +49,15 @@ int main(){
       hamiltonian(hamiltonian_vec, s, params, neighbour, i);
       magnetization(magnetization_vec, s, params, i);
   }
+
+  FILE *obs_file;
+  obs_file = fopen("obs_output.txt","w");
+  for(long int i = 0; i < C; i++){
+      fprintf(obs_file, "%e\t%e\n", hamiltonian_vec[i], magnetization_vec[i]);
+  }
+  fclose(obs_file);
+
+  printf("finished\n");
 
   fclose(config_file);
   free(s);
