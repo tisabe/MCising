@@ -1,8 +1,6 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
 
-#include <complex.h>
-
 //typedef struct parameters_tag parameters;
 struct parameters_tag;
 
