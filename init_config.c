@@ -32,7 +32,7 @@ void init_config_rng(char *configuration, parameters params){
     	gsl_rng_free(r);
 }
 
-void init_config_alterate(char *configuration, parameters params){
+void init_config_alternate(char *configuration, parameters params){
 	long int L= params.L;
 
     for (int i=0; i<L; i=i+2) {

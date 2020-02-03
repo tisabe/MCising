@@ -18,7 +18,7 @@ int main(){
   params.beta = 0.5;
   params.B = 0.01;
 
-  long int C = 50; //50000
+  long int C = 100; //50000
 
   params.L = ipow(params.N,params.D);
 
@@ -34,17 +34,19 @@ int main(){
 
   init_config_rng(s, params);
 
+  int prog = 0;
+
   for(long int i = 0; i < C; i++){
     //if(i % 1000 == 0){
       for(long int j = 0; j < params.L; j++){
         fprintf(config_file, "%d\t", s[j]);
       }
       fprintf(config_file, "\n");
-      printf("Configuration saved\n");
+      if(i%10 == 0){printf("%i proc. progress\n",prog); prog += 10;}
     //}
       step_mc(s, params.B, params.beta, params.N, params.D);  //params
-      hamiltonian(hamiltonian_vec, s, neighbour, params.B, params.N, params.D, i);
-      magnetization(magnetization_vec, s, params.N, params.D, i);
+      hamiltonian(hamiltonian_vec, s, params, neighbour, i);
+      magnetization(magnetization_vec, s, params, i);
   }
 
   fclose(config_file);
