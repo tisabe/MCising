@@ -32,7 +32,7 @@ int main(){
   FILE *config_file;
   config_file = fopen("config_output.txt","w");
 
-  init_config1(s, params);
+  init_config_rng(s, params);
 
   for(long int i = 0; i < C; i++){
     //if(i % 1000 == 0){

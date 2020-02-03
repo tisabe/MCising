@@ -7,25 +7,21 @@
 /*********************************************************************************
 this file contains three different functions to create starting configuration of size L declared in params
 
-init_config1: set entries using the rand() function from C
-init_config2: set entries using the rng function from gsl	https://www.gnu.org/software/gsl/doc/html/rng.html
-init_config3: alternate the entries between 1 and -1
-
+init_config_rand: set entries using the rand() function from C
+init_config_rng: set entries using the rng function from gsl	https://www.gnu.org/software/gsl/doc/html/rng.html
+init_config_alternate: alternate the entries between 1 and -1
+init_config_up: all entries are +1
+init_config_down: all entries are -1
 **********************************************************************************/
-void init_config1(char *configuration, parameters params){
+void init_config_rand(char *configuration, parameters params){
 	long int L= params.L;
 
     for (int i=0; i<L; i++) {
-        if(((double) rand())/RAND_MAX<0.5){
-            configuration[i]=1;
-        }
-        else{
-            configuration[i]=-1;
-        }
+        configuration[i] = 2*(rand()) % 2 - 1;
     }
 }
 
-void init_config2(char *configuration, parameters params){
+void init_config_rng(char *configuration, parameters params){
 	long int L= params.L;
 	gsl_rng * r = gsl_rng_alloc (gsl_rng_taus);
 	//double r_max = gsl_rng_max(r);
@@ -36,7 +32,7 @@ void init_config2(char *configuration, parameters params){
     	gsl_rng_free(r);
 }
 
-void init_config3(char *configuration, parameters params){
+void init_config_alterate(char *configuration, parameters params){
 	long int L= params.L;
 
     for (int i=0; i<L; i=i+2) {
@@ -44,6 +40,22 @@ void init_config3(char *configuration, parameters params){
     }
     for (long int i=1; i<L; i=i+2) {
         configuration[i]=-1;
+    }
+}
+
+void init_config_up(char *configuration, parameters params){
+	long int L= params.L;
+
+    for (int i=0; i<L; i++) {
+            configuration[i]=1;
+    }
+}
+
+void init_config_down(char *configuration, parameters params){
+	long int L= params.L;
+
+    for (int i=0; i<L; i++) {
+            configuration[i]=-1;
     }
 }
 /*
