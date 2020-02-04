@@ -7,9 +7,9 @@
 #include "vmath.h"
 
 double hamiltonian(char *in, parameters params){
-    static long int *neighbour = NULL:
-    static long int prev_N, prev_D, L:
-    if((neighbour==NULL) || (prev_N != params.N) || (prev.D != params.D)){
+    static long int *neighbour = NULL;
+    static long int prev_N, prev_D, L;
+    if((neighbour==NULL) || (prev_N != params.N) || (prev_D != params.D)){
     	free(neighbour);
 	L = ipow(params.N, params.D);
 	neighbour = malloc(2*params.D*L*sizeof(long int));
