@@ -1,0 +1,63 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
+
+#include "structs.h"
+#include "geometry.h"
+#include "vmath.h"
+#include "metropolis.h"
+#include "init_config.h"
+#include "observables.h"
+
+#define num_params 12
+int main() {
+    printf("starting sets...\n");
+    parameters params;
+
+    params.N = 100;
+    params.D = 2;
+    params.L = ipow(params.N,params.D);
+
+    long int steps = 500;
+
+    // we define the number of parameter sets that will be calculated and the parameters itself
+    //int num_params = 12;
+    double beta_arr[num_params] = {0.1,0.3,0.5,0.7,0.1,0.3,0.5,0.7,0.1,0.3,0.5,0.7};
+    double B_arr[num_params] = {0.0,0.0,0.0,0.0,0.01,0.01,0.01,0.01,0.03,0.03,0.03,0.03};
+
+    char *s = malloc(params.L * sizeof(char));
+    double *h_vec = malloc(steps * sizeof(double));
+    double *m_vec = malloc(steps * sizeof(double));
+
+    printf("starting loop\n");
+
+    for(int ip=0; ip<num_params; ip++) { // loop over all parameter sets
+
+        init_config_rng(s, 42, params); // every chain will be started from the same starting configuration
+        params.beta = beta_arr[ip];
+        params.B = B_arr[ip];
+        printf("starting mc with params %d\n", ip);
+        for(long int i=0; i<steps; i++) { // loop over steps
+            h_vec[i] = hamiltonian(s, params);
+            //printf("1\n");
+            m_vec[i] = magnetization(s, params);
+            //printf("2\n");
+            step_mc(s, ip + 42, params); // do the monte-carlo step with a different seed
+        }
+        printf("writing file %d\n", ip);
+        // generate the file name
+        FILE *obs_file;
+        char str[80];
+        sprintf(str, "%d", ip);
+        strcat(str, ".txt");
+        obs_file = fopen(str,"w");
+        for(long int i = 0; i < steps; i++) {
+            fprintf(obs_file, "%ld\t%e\t%e\n", i, h_vec[i], m_vec[i]);
+        }
+        fclose(obs_file);
+        printf("calculated set %d\n", ip);
+    }
+
+    return 0;
+}
