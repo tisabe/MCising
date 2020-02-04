@@ -6,7 +6,17 @@
 #include "geometry.h"
 #include "vmath.h"
 
-double hamiltonian(char *in, parameters params, long int *neighbour){
+double hamiltonian(char *in, parameters params){
+    static long int *neighbour = NULL;
+    static long int prev_N, prev_D, L;
+    if((neighbour==NULL) || (prev_N != params.N) || (prev_D != params.D)){
+    	free(neighbour);
+	L = ipow(params.N, params.D);
+	neighbour = malloc(2*params.D*L*sizeof(long int));
+	nneighbour_init(neighbour, params.N, params.D);
+	prev_N = params.N;
+	prev_D = params.D;
+    }
     double hamilton_config = 0;
     for (long int i=0; i<params.L; i++){
         hamilton_config += (-1)*params.B*in[i];
