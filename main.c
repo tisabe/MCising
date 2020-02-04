@@ -23,11 +23,8 @@ int main(){
   params.L = ipow(params.N,params.D);
 
   char *s = malloc(params.L * sizeof(char));
-  double *hamiltonian_vec = malloc(params.L * sizeof(double));
-  double *magnetization_vec = malloc(params.L * sizeof(double));
-  long int *neighbour = malloc(2*params.D*params.L*sizeof(long int));
-
-  nneighbour_init(neighbour, params.N, params.D);
+  double *hamiltonian_vec = malloc(C * sizeof(double));
+  double *magnetization_vec = malloc(C * sizeof(double));
 
   FILE *config_file;
 
@@ -47,7 +44,7 @@ int main(){
       if(i%100 == 0){printf("Saving config no. %ld\n",prog); prog += 100;}
     }
       step_mc(s, 42, params);
-      hamiltonian_vec[i]=hamiltonian(s, params, neighbour);
+      hamiltonian_vec[i]=hamiltonian(s, params);
       magnetization_vec[i]=magnetization(s, params);
   }
 
