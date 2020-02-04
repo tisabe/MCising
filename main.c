@@ -47,8 +47,8 @@ int main(){
       if(i%100 == 0){printf("Saving config no. %ld\n",prog); prog += 100;}
     }
       step_mc(s, 42, params);
-      hamiltonian(hamiltonian_vec, s, params, neighbour, i);
-      magnetization(magnetization_vec, s, params, i);
+      hamiltonian_vec[i]=hamiltonian(s, params, neighbour);
+      magnetization_vec[i]=magnetization(s, params);
   }
 
   FILE *obs_file;
