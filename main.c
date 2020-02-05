@@ -18,7 +18,7 @@ int main(){
   params.beta = 0.5;
   params.B = 0.01;
 
-  long int C = 5000; //50000
+  long int C = 50000; //50000
 
   params.L = ipow(params.N,params.D);
 
@@ -36,12 +36,12 @@ int main(){
   long int prog = 0;
 
   for(long int i = 0; i < C; i++){
-    if(i % 100 == 0){
+    if(i % 1000 == 0){
       for(long int j = 0; j < params.L; j++){
         fprintf(config_file, "%d\t", s[j]);
       }
       fprintf(config_file, "\n");
-      if(i%100 == 0){printf("Saving config no. %ld\n",prog); prog += 100;}
+      if(i%1000 == 0){printf("Saving Montecarlo step no. %ld\n",prog); prog += 1000;}
     }
       step_mc(s, 42, params);
       hamiltonian_vec[i]=hamiltonian(s, params);
@@ -54,16 +54,13 @@ int main(){
       fprintf(obs_file, "%ld\t%e\t%e\n", i, hamiltonian_vec[i], magnetization_vec[i]);
   }
   fclose(obs_file);
-
-  printf("finished\n");
+  fclose(config_file);
 
   free(s);
-  printf("last energy: %e\n", hamiltonian_vec[C-1]);
-
   free(hamiltonian_vec);
   free(magnetization_vec);
 
-  fclose(config_file);
+  printf("finished\n");
 
   return 0;
 }
