@@ -47,7 +47,7 @@ void step_mc(char *s, unsigned long int seed, parameters params) {
         for(int d=0; d<params.D; d++){
             diff_H += s[i]*(s[neighbours[2*(i*params.D+d)]]+s[neighbours[2*(i*params.D+d)+1]]);
         }
-        diff_H = 2*(diff_H + params.B)*s[i];
+        diff_H = 2*(diff_H + params.B*s[i]);
 
         // now calculate p as exponential
         double p = exp(-1*params.beta*diff_H);

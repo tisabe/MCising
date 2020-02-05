@@ -19,7 +19,7 @@ int main() {
     params.D = 2;
     params.L = ipow(params.N,params.D);
 
-    long int steps = 500;
+    long int steps = 5000;
 
     // we define the number of parameter sets that will be calculated and the parameters itself
     //int num_params = 12;
@@ -45,19 +45,20 @@ int main() {
             //printf("2\n");
             step_mc(s, ip + 42, params); // do the monte-carlo step with a different seed
         }
-        printf("writing file %d\n", ip);
         // generate the file name
         FILE *obs_file;
         char str[80];
-        sprintf(str, "%d", ip);
-        strcat(str, ".txt");
+        //char str2[80];
+        sprintf(str, "params_out/out%d.txt", ip);
         obs_file = fopen(str,"w");
         for(long int i = 0; i < steps; i++) {
             fprintf(obs_file, "%ld\t%e\t%e\n", i, h_vec[i], m_vec[i]);
         }
+
         fclose(obs_file);
-        printf("calculated set %d\n", ip);
+
     }
+    printf("finished calculations\n");
 
     return 0;
 }
