@@ -34,8 +34,8 @@ int main() {
 
     // we define the number of parameter sets that will be calculated and the parameters itself
     //int num_params = 12;
-    double beta_arr[num_params] = {0.1,0.3,0.4,0.425,0.43,0.435,0.44,0.45,0.5,0.7,0.1,0.3,0.5,0.7,0.1,0.3,0.5,0.7};
-    double B_arr[num_params] = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.01,0.01,0.03,0.03,0.03,0.03};
+    double beta_arr[num_params] = {0.1,0.3,0.5,0.7,0.1,0.3,0.5,0.7,0.1,0.3,0.5,0.7,0.4,0.425,0.43,0.435,0.44,0.45};
+    double B_arr[num_params] = {0.0,0.0,0.0,0.01,0.01,0.01,0.01,0.03,0.03,0.03,0.03,0.0,0.0,0.0,0.0,0.0,0.0};
     // NOTE: for seed 42 in init_config, 45 in step_mc, beta=0.7, B=0.0, intersting stuff happens
 
     char *s = malloc(params.L * sizeof(char));
