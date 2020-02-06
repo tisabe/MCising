@@ -9,16 +9,26 @@
 #include "init_config.h"
 #include "observables.h"
 
+unsigned long int float_to_uint(double f) {
+    if (f<0) {
+        f *= -1.0;
+    }
+    while (f != (int)f) {
+        f *= 10.0;
+    }
+    return (unsigned long int)f;
+}
+
 int main(){
 
   parameters params;
 
   params.N = 100;
   params.D = 2;
-  params.beta = 0.5;
-  params.B = 0.01;
+  params.beta = 0.43;
+  params.B = 0.00;
 
-  long int C = 50000; //50000
+  long int C = 50000;
 
   params.L = ipow(params.N,params.D);
 
@@ -43,9 +53,9 @@ int main(){
       fprintf(config_file, "\n");
       if(i%1000 == 0){printf("Saving Montecarlo step no. %ld\n",prog); prog += 1000;}
     }
-      step_mc(s, 42, params);
-      hamiltonian_vec[i]=hamiltonian(s, params);
-      magnetization_vec[i]=magnetization(s, params);
+    step_mc(s, float_to_uint(params.beta)*float_to_uint(params.B), params);
+    hamiltonian_vec[i]=hamiltonian(s, params);
+    magnetization_vec[i]=magnetization(s, params);
   }
 
   FILE *obs_file;
