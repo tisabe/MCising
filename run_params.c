@@ -30,7 +30,7 @@ int main() {
     params.D = 2;
     params.L = ipow(params.N,params.D);
 
-    long int steps = 5000;
+    long int steps = 50000;
 
     // we define the number of parameter sets that will be calculated and the parameters itself
     //int num_params = 12;
