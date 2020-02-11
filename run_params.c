@@ -50,10 +50,10 @@ int main() {
         params.beta = beta_arr[ip];
         params.B = B_arr[ip];
         gsl_rng * r = gsl_rng_alloc (gsl_rng_taus);
+        gsl_rng_set(r, float_to_uint(params.beta)+float_to_uint(params.B));
 
         printf("starting mc with params beta=%e, B=%e\n", params.beta, params.B);
         for(long int i=0; i<steps; i++) { // loop over steps
-            gsl_rng_set(r, float_to_uint(params.beta)+float_to_uint(params.B));
             h_vec[i] = hamiltonian(s, params);
             //printf("1\n");
             m_vec[i] = magnetization(s, params);
