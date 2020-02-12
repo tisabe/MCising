@@ -23,7 +23,7 @@ void step_mc(char *s, double *diff_H_test, gsl_rng * r, parameters params) {
         prev_N = params.N;
         prev_D = params.D;
     }
-    diff_H_test[1] = 0;
+    diff_H_test[0] = 0;
     //Loop over all points i in the lattice
     for(long int i=0; i<params.L; i++){
 
@@ -34,7 +34,7 @@ void step_mc(char *s, double *diff_H_test, gsl_rng * r, parameters params) {
             diff_H += s[i]*(s[neighbours[2*(i*params.D+d)]]+s[neighbours[2*(i*params.D+d)+1]]);
         }
         
-        diff_H_test[1] += diff_H + params.B*s[i];
+        diff_H_test[0] += diff_H + params.B*s[i];
         diff_H = 2*(diff_H + params.B*s[i]);
         
         // now calculate p as exponential
