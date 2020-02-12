@@ -62,7 +62,7 @@ int main() {
             m_vec[i] = magnetization(s, params);
             //printf("2\n");
             step_mc(s, diff_H_test, r, params); // do the monte-carlo step with a different seed
-	    condition = -2 * (h_vec[i] + params.B/2. * m_vec[i])/diff_H_test
+	    condition = -2 * (h_vec[i] + params.B/2. * m_vec[i])/diff_H_test;
 	    printf("%e\n", condition);
         }
 

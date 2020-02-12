@@ -8,7 +8,7 @@
 #include "vmath.h"
 
 
-void step_mc(char *s, double *diff_H_test, gsl_rng * r, parameters params) {
+void step_mc(char *s, double diff_H_test, gsl_rng * r, parameters params) {
     static long int *neighbours = NULL;
     static long int prev_N, prev_D, L;
 
@@ -34,7 +34,7 @@ void step_mc(char *s, double *diff_H_test, gsl_rng * r, parameters params) {
             diff_H += s[i]*(s[neighbours[2*(i*params.D+d)]]+s[neighbours[2*(i*params.D+d)+1]]);
         }
         
-        diff_H_test += diff_H + params.B*s[i]
+        diff_H_test += diff_H + params.B*s[i];
         diff_H = 2*(diff_H + params.B*s[i]);
         
         // now calculate p as exponential
