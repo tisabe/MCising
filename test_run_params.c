@@ -33,7 +33,7 @@ int main() {
     long int steps = 50;
 
     // we define the number of parameter sets that will be calculated and the parameters itself
-    //int num_params = 1;
+    int num_params = 1;
     double beta_arr[num_params] = {0.1};
     double B_arr[num_params] = {0.0};
     // NOTE: for seed 42 in init_config, 45 in step_mc, beta=0.7, B=0.0, intersting stuff happens
@@ -43,7 +43,8 @@ int main() {
     double *m_vec = malloc(steps * sizeof(double));
 
     double diff_H_test = 0;
-    double condition = 0;
+    double condition1 = 0;
+    double condition2 = 0;
     double *ptr= &diff_H_test;
 
     printf("starting loop\n");
@@ -63,8 +64,9 @@ int main() {
             m_vec[i] = magnetization(s, params);
             //printf("2\n");
             step_mc(s, ptr, r, params); // do the monte-carlo step with a different seed
-	    condition = -2 * (h_vec[i] + params.B/2. * m_vec[i])/diff_H_test;
-	    printf("%e\n", condition);
+	    condition1 = -2 * (h_vec[i] + params.B/2. * m_vec[i])/diff_H_test;
+	    condition2 = (h_vec[i] + params.B/2. * m_vec[i])+ diff_H_test/2.;
+	    printf("relative %e /t , /t difference %e\n", condition1, condition2);
         }
 
 
