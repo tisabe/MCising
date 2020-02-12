@@ -8,7 +8,7 @@
 #include "vmath.h"
 
 
-void step_mc(char *s, double diff_H_test, gsl_rng * r, parameters params) {
+void step_mc(char *s, double *diff_H_test, gsl_rng * r, parameters params) {
     static long int *neighbours = NULL;
     static long int prev_N, prev_D, L;
 
