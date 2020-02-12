@@ -23,7 +23,7 @@ void step_mc(char *s, double diff_H_test, gsl_rng * r, parameters params) {
         prev_N = params.N;
         prev_D = params.D;
     }
-    double diff_H_test = 0;
+    diff_H_test = 0;
     //Loop over all points i in the lattice
     for(long int i=0; i<params.L; i++){
 
