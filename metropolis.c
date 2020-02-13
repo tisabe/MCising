@@ -48,3 +48,35 @@ void step_mc(char *s, gsl_rng * r, parameters params) {
     }
     // after iterating over all lattice points, the MC step is completed
 }
+
+// this function calculates the sum over the b(z) * s(z) extracted from step_mc
+double calc_b(char *s, parameters params) {
+    static long int *neighbours = NULL;
+    static long int prev_N, prev_D, L;
+
+    //Check if geometry parameters have changed. If yes, free, reallocate and recalculate the next neighbours the array again
+    if((neighbours == NULL) || (prev_N != params.N) || (prev_D != params.D)){
+        if(neighbours != NULL){free(neighbours);}
+        neighbours = malloc(2*params.D*params.L*sizeof(long int));
+        nneighbour_init(neighbours, params.N, params.D);
+        prev_N = params.N;
+        prev_D = params.D;
+    }
+    double diff_H_test = 0;
+    //Loop over all points i in the lattice
+    for(long int i=0; i<params.L; i++){
+
+        double diff_H = 0;
+
+        // loop over all dimensions, for there are 2 next neighbours of point i in each dimension
+        // this is the first term of the sum in eq. (35)
+        for(int d=0; d<params.D; d++){
+            diff_H += s[i]*(s[neighbours[2*(i*params.D+d)]]+s[neighbours[2*(i*params.D+d)+1]]);
+        }
+        
+        // add the second term of the sum an add them all up
+        diff_H_test += diff_H + params.B*s[i]; 
+        
+    }
+    return diff_H_test;
+}

@@ -6,5 +6,6 @@
 
 
 void step_mc(char *s, gsl_rng * r, parameters params);
+double calc_b(char *s, parameters params);
 
 #endif

@@ -6,12 +6,12 @@
 #include "structs.h"
 #include "geometry.h"
 #include "vmath.h"
-#include "test_metropolis.h"
+#include "metropolis.h"
 #include "init_config.h"
 #include "observables.h"
 
 #define num_params 1
-
+// here we basically do the same thing as in run_params and print out the consistency check (called condition)
 unsigned long int float_to_uint(double f) {
     if (f<0) {
         f *= -1.0;
@@ -30,23 +30,21 @@ int main() {
     params.D = 2;
     params.L = ipow(params.N,params.D);
 
-    long int steps = 50;
+    long int steps = 5000;
 
     // we define the number of parameter sets that will be calculated and the parameters itself
     // int num_params = 1;
     double beta_arr[num_params] = {0.1};
     double B_arr[num_params] = {0.0};
-    // NOTE: for seed 42 in init_config, 45 in step_mc, beta=0.7, B=0.0, intersting stuff happens
+    // NOTE: for seed 2 in init_config, 45 in step_mc, beta=0.7, B=0.0, intersting stuff happens
 
     char *s = malloc(params.L * sizeof(char));
     double *h_vec = malloc(steps * sizeof(double));
     double *m_vec = malloc(steps * sizeof(double));
 
     double diff_H_test = 0;
-    double condition1 = 0;
-    double condition2 = 0;
-    double *ptr= &diff_H_test;
-
+    double condition = 0;
+    double condition_sum = 0;
     printf("starting loop\n");
 
     for(int ip=0; ip<num_params; ip++) { // loop over all parameter sets
@@ -63,25 +61,15 @@ int main() {
             //printf("1\n");
             m_vec[i] = magnetization(s, params);
             //printf("2\n");
-            step_mc(s, ptr, r, params); // do the monte-carlo step with a different seed
-	    condition1 = -2 * (h_vec[i] + params.B/2. * m_vec[i])/diff_H_test;
-	    condition2 = (h_vec[i] + params.B/2. * m_vec[i])+ diff_H_test/2.;
-	    printf("relative %e /t , /t difference %e\n", condition1, condition2);
+            diff_H_test = calc_b(s, params);
+            step_mc(s, r, params); // do the monte-carlo step with a different seed
+            
+            condition = (h_vec[i] + params.B/2. * m_vec[i])+ diff_H_test/2.; //calculate the condition (difference between right and left side of the eq.) which should be 0
+            condition_sum += condition; //sum over all conditions
+            printf("difference %e\n", condition); 
         }
+    printf("condition_sum is %e\n", condition_sum);
 
-
-/*
-        // generate the file name
-        FILE *obs_file;
-        char str[80];
-        //char str2[80];
-        sprintf(str, "params_out/out%d.txt", ip);
-        obs_file = fopen(str,"w");
-        for(long int i = 0; i < steps; i++) {
-            fprintf(obs_file, "%ld\t%e\t%e\n", i, h_vec[i], m_vec[i]);
-        }
-
-        fclose(obs_file); */
         gsl_rng_free(r);
 
     }
