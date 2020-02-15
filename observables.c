@@ -6,7 +6,15 @@
 #include "geometry.h"
 #include "vmath.h"
 
+/*This function calculates the the hamiltonian of a given spin configuration:
+
+    char *in: pointer to the given spin configuration
+    parameter params: struct containing the information of the system
+
+    returns: double containing the energy of the spin configuration
+*/
 double hamiltonian(char *in, parameters params){
+  //initialisation of the next neighbour array and check for consistency with system parameters
   static long int *neighbour = NULL;
   static long int prev_N, prev_D, L;
   if((neighbour==NULL) || (prev_N != params.N) || (prev_D != params.D)){
@@ -17,6 +25,7 @@ double hamiltonian(char *in, parameters params){
   	prev_N = params.N;
   	prev_D = params.D;
   }
+  //calculation of the energy by summation over every spin
   double hamilton_config = 0;
   for (long int i=0; i<params.L; i++){
       hamilton_config += (-1)*params.B*in[i];
@@ -27,7 +36,15 @@ double hamiltonian(char *in, parameters params){
   return hamilton_config;
 }
 
+/*This function calculates the the magnetization of a given spin configuration:
+
+    char *in: pointer to the given spin configuration
+    parameter params: struct containing the information of the system
+
+    returns: double containing the magnetization of the spin configuration
+*/
 double magnetization(char *in, parameters params){
+    //calculation of the magnetization by summation of all spin values
     double magnetization_config = 0;
     for (long int i=0; i<params.L; i++){
         magnetization_config += in[i];
