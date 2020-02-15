@@ -15,5 +15,5 @@ mc_parallel_test: geometry.c vmath.c metropolis.c init_config.c observables.c
 	./mc_parallel_test.exe
 
 test_analytical_solution: geometry.c vmath.c init_config.c observables.c
-		gcc test_analytical_solution.c -lm -fopenmp geometry.c vmath.c init_config.c observables.c -L/usr/local/lib -lgsl -o test_analytical_solution.exe
-		./test_analytical_solution.exe
+	gcc test_analytical_solution.c -lm -fopenmp geometry.c vmath.c init_config.c observables.c -L/usr/local/lib -lgsl -o test_analytical_solution.exe
+	./test_analytical_solution.exe
