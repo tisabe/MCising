@@ -7,8 +7,8 @@ run_params: geometry.c vmath.c metropolis.c init_config.c observables.c
 	./run_params.exe
 
 consistency_test: vmath.c geometry.c metropolis.c init_config.c observables.c
-	gcc consistency_test.c -lm -fopenmp -lgsl structs.h vmath.c geometry.c metropolis.c init_config.c observables.c  -O3  -o cons_test.out
-	./cons_test.out
+	gcc consistency_test.c -lm -fopenmp -lgsl structs.h vmath.c geometry.c metropolis.c init_config.c observables.c  -O3  -o consistency_test.exe
+	./consistency_test.exe
 
 mc_parallel_test: geometry.c vmath.c metropolis.c init_config.c observables.c
 	gcc mc_parallel_test.c -lm -fopenmp geometry.c vmath.c metropolis.c init_config.c observables.c -L/usr/local/lib -lgsl -o mc_parallel_test.exe
