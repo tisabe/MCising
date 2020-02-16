@@ -50,26 +50,3 @@ obs_magn (Birkan)
         magn: magnetisation of configuration        double
     Tested by: ???
 
-    
-auto_corr (Tim)
-	input:
-		*x: vector of which is tested				double array of size N
-		N: length of the vector						long int
-		k: offset of autocorrelation				long int
-		mu: true mean of the sample					double
-	output:
-		res: auto correlation of the sample			double
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
