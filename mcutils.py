@@ -26,9 +26,11 @@ def makePlot(data, y_label):
     plt.ylabel(y_label)
     plt.show()
 
+#calculate the autocorrelation of data point k steps apart in the array obs
 def auto_corr(obs, N, k, mu):
     return sum((obs[:N-k] - mu) * (obs[k:] - mu))/(N-k)
 
+#generate an array with the autocorrelation of the data array with varying k
 def calc_autocorr(data, k_max):
     autocorr = []
     k_array = np.arange(k_max)
@@ -37,6 +39,7 @@ def calc_autocorr(data, k_max):
         autocorr.append(auto_corr(data, len(data), k, energy_expect))
     return autocorr/auto_corr(data, len(data), 0, energy_expect)
 
+#fit function for scipy.optimize.curve_fit
 exp_fit = lambda x, a, tau : a*np.exp(-x/tau)
 
 #integrated autocorrelation time
