@@ -21,7 +21,7 @@ calc_b (Mahni)
 	output:
 		double
 
-// creates an initial configuration with different methods or special configurations	
+// creates an initial configuration with different methods or special configurations
 init_config_(rand/rng/alternate/up/down) (Mahni)
     input:
         *s: configuration					        char array of size N**D
@@ -29,24 +29,22 @@ init_config_(rand/rng/alternate/up/down) (Mahni)
 	D: number of dimensions						unsigned int
     output:
         void
-    
-obs_energy (Birkan)
-    input:
-        *s: configuration					        char array of size N**D
-        B: magnetic field                           double
-        beta: 1/kT                                  double
- 		N: length of all axis						long int
-		D: number of dimensions						unsigned int
-    output:
-        energy: energy of configuration             double
-    Tested by: ???
-    
-obs_magn (Birkan)
-    input:
-        *s: configuration					        char array of size N**D
- 		N: length of all axis						long int
-		D: number of dimensions						unsigned int
-    output:
-        magn: magnetisation of configuration        double
-    Tested by: ???
 
+//calculates the the hamiltonian of a given spin configuration
+hamiltonian (Birkan)
+    input:
+      *s: configuration					        						char array of size N**D
+			B: magnetic field                         	  double
+ 			N: length of all axis													long int
+			D: number of dimensions												unsigned int
+    output:
+  		double
+
+//calculates the the magnetization of a given spin configuration
+magnetization (Birkan)
+    input:
+      *s: configuration					        					char array of size N**D
+ 			N: length of all axis												long int
+			D: number of dimensions											unsigned int
+    output:
+  		double
