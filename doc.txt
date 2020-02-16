@@ -1,24 +1,34 @@
 this is the doc file we use to plan the project
 
-metropolis (Tim)
+metropolis:
+step_mc (Tim)
 	input:
 		*s: configuration					        char array of size N**D
-        B: magnetic field                           double
-        beta: 1/kT                                  double
+        	B: magnetic field                           double
+        	beta: 1/kT                                  double
  		N: length of all axis						long int
 		D: number of dimensions						unsigned int
 	output:
 		void
-	Tested by: ???
-	
-init_config (Mahni)
-    input:
-        *s: configuration					        char array of size N**D
+
+// this function calculates the sum over the b(z) * s(z) extracted from step_mc
+calc_b (Mahni)
+	input:
+		*s: configuration					        char array of size N**D
+		B: magnetic field                           double
  		N: length of all axis						long int
 		D: number of dimensions						unsigned int
+	output:
+		double
+
+// creates an initial configuration with different methods or special configurations	
+init_config_(rand/rng/alternate/up/down) (Mahni)
+    input:
+        *s: configuration					        char array of size N**D
+ 	N: length of all axis						long int
+	D: number of dimensions						unsigned int
     output:
         void
-    Tested by: ???
     
 obs_energy (Birkan)
     input:
@@ -39,17 +49,7 @@ obs_magn (Birkan)
     output:
         magn: magnetisation of configuration        double
     Tested by: ???
-    
-obs_correlation (???)
-    input:
-        *s: configuration					        char array of size N**D
-        index1: lattice point 1                     long int
-        index2: lattice point 2                     long int
- 		N: length of all axis						long int
-		D: number of dimensions						unsigned int
-    output:
-        corr: correlation of point 1 and 2          double
-    Tested by: ???
+
     
 auto_corr (Tim)
 	input:
